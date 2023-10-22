@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { parseCSVData } from "./helpers/CSVHandling";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import { FileInput, Checkbox, Button } from "@blueprintjs/core";
+import { runPCA } from "./helpers/PCAHelper";
 
 function UserInput() {
   const geneCountRef = useRef(null);
@@ -13,6 +14,7 @@ function UserInput() {
   const [selectedGeneCountName, setSelectedGeneCountName] = useState("");
   const [selectedSampleInfoName, setSelectedSampleInfoName] = useState("");
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
+  const [PcaData, setPcaData] = useState([]);
 
   useEffect(() => {
     // Logic to handle disabling/enabling checkboxes
@@ -32,6 +34,11 @@ function UserInput() {
         });
     }
   }, [selectedCheckboxes]);
+
+  useEffect(() => {
+    runPCA(parsedCsvData, setPcaData)
+    console.log(PcaData)
+  }, [parsedCsvData]);
 
   const handleFileChange = (e, identifier) => {
     setShowChart(false);
@@ -88,8 +95,7 @@ function UserInput() {
             data-testid="input2"
           />
         </div>
-        <p className="text-center my-4">Please select 2 components:</p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 justify-center mt-6">
           <Checkbox
             label="PC1"
             value="1"
