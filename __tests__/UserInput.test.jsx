@@ -11,7 +11,7 @@ describe('User Input Component', () => {
   it('renders input fields for CSV uploads', () => {
     render(<UserInput />);
     const input1 = screen.getByLabelText(/upload data/i);
-    const input2 = screen.getByLabelText(/upload sample info/i);
+    const input2 = screen.getByLabelText(/experimental design table/i);
     expect(input1).toBeInTheDocument();
     expect(input2).toBeInTheDocument();
   });
@@ -20,7 +20,7 @@ describe('User Input Component', () => {
     render(<UserInput />);
     
     const input1 = screen.getByLabelText(/upload data/i);
-    const input2 = screen.getByLabelText(/upload sample info/i);
+    const input2 = screen.getByLabelText(/experimental design table/i);
     
     const file1 = new File(['gene_count'], 'data.csv', { type: 'text/csv' });
     const file2 = new File(['sample_info'], 'info.csv', { type: 'text/csv' });
@@ -51,7 +51,13 @@ describe('User Input Component', () => {
   test('handles checkbox selection', () => {
     render(<UserInput />);
     const checkbox = screen.getByLabelText(/pc1/i);
-    fireEvent.click(checkbox);
+    const checkbox2 = screen.getByLabelText(/pc3/i);
     expect(checkbox).toBeChecked();
+
+    fireEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+
+    fireEvent.click(checkbox2);
+    expect(checkbox2).toBeChecked(); 
   });  
 });
