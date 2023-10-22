@@ -1,4 +1,4 @@
-import Chart from './components/Chart'
+import Chart from './components/UserInput'
 
 function App() {
   return (
