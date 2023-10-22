@@ -1,3 +1,5 @@
+import Papa from "papaparse";
+
 export const parseCSVData = (file, setCSVData) => {
     Papa.parse(file.current.files[0], {
       header: true,
@@ -7,4 +9,3 @@ export const parseCSVData = (file, setCSVData) => {
     });
   };
 
-  

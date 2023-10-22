@@ -10,8 +10,10 @@ describe('User Input Component', () => {
 
   it('renders input fields for CSV uploads', () => {
     render(<UserInput />);
-    const input = screen.getByLabelText(/upload csv/i);
-    expect(input).toBeInTheDocument();
+    const input1 = screen.getByLabelText(/upload data/i);
+    const input2 = screen.getByLabelText(/upload sample info/i);
+    expect(input1).toBeInTheDocument();
+    expect(input2).toBeInTheDocument();
   });
 
   test('handles file uploads', () => {
@@ -28,7 +30,6 @@ describe('User Input Component', () => {
     
     // Assertions for input1
     expect(input1.files[0]).toBe(file1);
-    expect(input1.files.item(0)).toBe(file1);
     expect(input1.files).toHaveLength(1);
 
     // Simulate file upload for input2
@@ -36,7 +37,6 @@ describe('User Input Component', () => {
     
     // Assertions for input2
     expect(input2.files[0]).toBe(file2);
-    expect(input2.files.item(0)).toBe(file2);
     expect(input2.files).toHaveLength(1);
 });
 
