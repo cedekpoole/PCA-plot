@@ -14,7 +14,8 @@ function UserInput() {
   const [selectedGeneCountName, setSelectedGeneCountName] = useState("");
   const [selectedSampleInfoName, setSelectedSampleInfoName] = useState("");
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
-  const [PcaData, setPcaData] = useState([]);
+  const [pcaData, setPcaData] = useState([]);
+  const [scoresData, setScoresData] = useState([]);
 
   useEffect(() => {
     // Logic to handle disabling/enabling checkboxes
@@ -34,11 +35,6 @@ function UserInput() {
         });
     }
   }, [selectedCheckboxes]);
-
-  useEffect(() => {
-    runPCA(parsedCsvData, setPcaData)
-    console.log(PcaData)
-  }, [parsedCsvData]);
 
   const handleFileChange = (e, identifier) => {
     setShowChart(false);
@@ -70,9 +66,15 @@ function UserInput() {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    runPCA(parsedCsvData, setPcaData, setScoresData)
+    setShowChart(true);
+  };
+
   return (
     <div data-testid="user-input">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex justify-center space-x-4 pt-10 flex-wrap">
           <FileInput
             text={selectedGeneCountName || "Upload data..."}
