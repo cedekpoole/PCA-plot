@@ -4,18 +4,15 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import { FileInput, Checkbox, Button } from "@blueprintjs/core";
 import { runPCA } from "./helpers/PCAHelper";
 
-function UserInput() {
+function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInfo }) {
   const geneCountRef = useRef(null);
   const sampleInfoRef = useRef(null);
 
-  const [showChart, setShowChart] = useState(false);
   const [parsedCsvData, setParsedCsvData] = useState([]);
-  const [parsedSampleInfo, setParsedSampleInfo] = useState([]);
   const [selectedGeneCountName, setSelectedGeneCountName] = useState("");
   const [selectedSampleInfoName, setSelectedSampleInfoName] = useState("");
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
-  const [pcaData, setPcaData] = useState([]);
-  const [scoresData, setScoresData] = useState([]);
+  
 
   useEffect(() => {
     // Logic to handle disabling/enabling checkboxes
