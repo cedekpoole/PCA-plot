@@ -7,6 +7,7 @@ function App() {
   const [pcaData, setPcaData] = useState([]);
   const [scoresData, setScoresData] = useState([]);
   const [parsedSampleInfo, setParsedSampleInfo] = useState([]);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
   return (
     <>
       <UserInput
@@ -14,12 +15,15 @@ function App() {
         setPcaData={setPcaData}
         setScoresData={setScoresData}
         setParsedSampleInfo={setParsedSampleInfo}
+        setSelectedCheckboxes={setSelectedCheckboxes}
+        selectedCheckboxes={selectedCheckboxes}
       />
       {showChart && (
         <PCAGraph
           pcaData={pcaData}
           scoresData={scoresData}
           parsedSampleInfo={parsedSampleInfo}
+          selectedPCs={selectedCheckboxes}
         />
       )}
     </>

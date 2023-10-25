@@ -1,7 +1,7 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-function PCAGraph({ pcaData, scoresData, parsedSampleInfo }) {
+function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
     const conditionColors = {
       treated: "red",
@@ -10,11 +10,14 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo }) {
 
     const seriesData = parsedSampleInfo.map((sample, idx) => {
       return {
-        name: Object.keys(sample)[0], // Sample name
+        name: Object.values(sample)[0],
         color: conditionColors[sample.condition],
         data: [[scoresData[idx][0], scoresData[idx][1]]],
       };
     });
+
+    // Sort the selected PCs in ascending order
+    const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
 
     return {
       chart: {
@@ -25,12 +28,16 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo }) {
       },
       xAxis: {
         title: {
-          text: `PC1 (${(pcaData.pc1 * 100).toFixed(2)}%)`,
+          text: `PC${sortedPCs[0]} (${(
+            pcaData[`pc${sortedPCs[0]}`] * 100
+          ).toFixed(2)}%)`,
         },
       },
       yAxis: {
         title: {
-          text: `PC2 (${(pcaData.pc2 * 100).toFixed(2)}%)`,
+          text: `PC${sortedPCs[1]} (${(
+            pcaData[`pc${sortedPCs[1]}`] * 100
+          ).toFixed(2)}%)`,
         },
       },
       plotOptions: {
@@ -40,20 +47,28 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo }) {
           },
           tooltip: {
             headerFormat: "<b>{series.name}</b><br>",
-            pointFormat: "PC1: {point.x}, PC2: {point.y}",
+            pointFormat: "",
           },
         },
       },
-      series: seriesData,
+      series: seriesData.map((series, index) => ({
+        ...series,
+        data: [
+          [
+            scoresData[index][sortedPCs[0] - 1],
+            scoresData[index][sortedPCs[1] - 1],
+          ],
+        ],
+      })),
     };
   };
 
   return (
     <div className="mt-6 flex flex-col lg:flex-row">
-      <div className="lg:w-3/5 w-full lg:mr-4">
+      <div className="lg:w-1/2 w-full lg:mr-4">
         <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
       </div>
-      <div className="lg:w-2/5 w-full bg-gray-200 lg:mt-0 mt-4">
+      <div className="lg:w-1/2 w-full bg-gray-200 lg:mt-0 mt-4">
         {/* Your second chart will go here */}
         <p>Placeholder for the second chart</p>
       </div>

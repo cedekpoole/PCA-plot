@@ -11,10 +11,11 @@ export const runPCA = (geneData, setPcaData, setScoresData) => {
     const pca = new PCA(transposedMatrix);
     const scores = pca.predict(transposedMatrix).data;
 
-    const pc1 = pca.getExplainedVariance()[0];
-    const pc2 = pca.getExplainedVariance()[1];
-    const pc3 = pca.getExplainedVariance()[2];
-    const pc4 = pca.getExplainedVariance()[3];
+    const explainedVariances = pca.getExplainedVariance();
+    const pc1 = explainedVariances[0];
+    const pc2 = explainedVariances[1];
+    const pc3 = explainedVariances[2];
+    const pc4 = explainedVariances[3];
 
     setPcaData({
       pc1,
