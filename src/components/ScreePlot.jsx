@@ -17,6 +17,7 @@ function ScreePlot({ pcaData }) {
             }
         },
         yAxis: {
+            lineWidth: 1,
             min: 0,
             max: 100,
             title: {
@@ -25,6 +26,7 @@ function ScreePlot({ pcaData }) {
         },
         plotOptions: {
             column: {
+                color: "rgb(60,89,193)",
                 tooltip: {
                     pointFormat: "<b>{point.y:.2f}%</b>"
                 }

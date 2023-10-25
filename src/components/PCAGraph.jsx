@@ -12,8 +12,8 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
 
     const conditionColors = {
-      treated: "red",
-      untreated: "blue",
+      treated: "rgb(254,125,43)",
+      untreated: "rgb(60,89,193",
     };
 
     const seriesData = {
@@ -57,6 +57,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         },
       },
       yAxis: {
+        lineWidth: 1,
         title: {
           text: `PC${sortedPCs[1]} (${(
             pcaData[`pc${sortedPCs[1]}`] * 100
