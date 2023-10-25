@@ -87,7 +87,8 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   };
 
   return (
-    <div className="mt-6 flex flex-col lg:flex-row">
+    <div className="flex justify-center">
+    <div className="mt-6 flex flex-col lg:flex-row w-4/5">
       <div className="lg:w-1/2 w-full lg:mr-4">
         <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
       </div>
@@ -96,6 +97,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       <ScreePlot pcaData={pcaData} />
       </div>
       </div>
+    </div>
     </div>
   );
 }
