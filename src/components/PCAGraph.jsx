@@ -3,18 +3,35 @@ import HighchartsReact from "highcharts-react-official";
 
 function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
+
     const conditionColors = {
       treated: "red",
       untreated: "blue",
     };
 
-    const seriesData = parsedSampleInfo.map((sample, idx) => {
-      return {
-        name: Object.values(sample)[0],
-        color: conditionColors[sample.condition],
-        data: [[scoresData[idx][0], scoresData[idx][1]]],
+    const seriesData = {
+        treated: {
+          name: "Treated",
+          color: conditionColors.treated,
+          data: [],
+        },
+        untreated: {
+          name: "Untreated",
+          color: conditionColors.untreated,
+          data: [],
+        },
       };
-    });
+
+      console.log(parsedSampleInfo[0]);
+
+      parsedSampleInfo.forEach((sample, idx) => {
+        const point = {
+          x: scoresData[idx][selectedPCs[0] - 1],
+          y: scoresData[idx][selectedPCs[1] - 1],
+          name: Object.values(sample)[0] // This will be used in the tooltip
+        };
+        seriesData[sample.condition].data.push(point);
+      });
 
     // Sort the selected PCs in ascending order
     const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
@@ -42,24 +59,23 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       },
       plotOptions: {
         scatter: {
-          marker: {
-            radius: 5,
-          },
           tooltip: {
-            headerFormat: "<b>{series.name}</b><br>",
-            pointFormat: "",
+            pointFormat: "<b>{point.name}</b>",
           },
         },
+        series: {
+            marker: {
+              symbol: "circle",
+              radius: 4,
+            },
+            states: {
+              inactive: {
+                opacity: 1,
+              },
+            },
       },
-      series: seriesData.map((series, index) => ({
-        ...series,
-        data: [
-          [
-            scoresData[index][sortedPCs[0] - 1],
-            scoresData[index][sortedPCs[1] - 1],
-          ],
-        ],
-      })),
+    },
+      series: Object.values(seriesData),
     };
   };
 
