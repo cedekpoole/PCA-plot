@@ -10,12 +10,14 @@ HC_exporting(Highcharts);
 
 function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
-
-    const colorsArray = ["rgb(254,125,43)", "rgb(60,89,193)", "rgb(0,128,0)", /* Add more colors if needed */ ];
+    const colorsArray = [
+      "rgb(254,125,43)",
+      "rgb(60,89,193)",
+      "rgb(0,128,0)" /* Add more colors if needed */,
+    ];
     let colorIdx = 0;
 
-    const seriesData = {}; 
-
+    const seriesData = {};
 
     // Sort the selected PCs in ascending order
     const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
@@ -26,7 +28,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         seriesData[sample.condition] = {
           name: sample.condition,
           color: colorsArray[colorIdx], // Assign a color from the array
-          data: []
+          data: [],
         };
 
         // Increment colorIdx so next new condition gets a different color
@@ -34,15 +36,15 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       }
     });
 
-      parsedSampleInfo.forEach((sample, idx) => {
-        const point = {
-          x: scoresData[idx][sortedPCs[0] - 1],
-          y: scoresData[idx][sortedPCs[1] - 1],
-          name: Object.values(sample)[0] // This will be used in the tooltip
-        };
-        seriesData[sample.condition].data.push(point);
-      });
-
+    parsedSampleInfo.forEach((sample, idx) => {
+      const point = {
+        x: scoresData[idx][sortedPCs[0] - 1],
+        y: scoresData[idx][sortedPCs[1] - 1],
+        name: Object.values(sample)[0],
+        type: Object.values(sample)[2],
+      };
+      seriesData[sample.condition].data.push(point);
+    });
 
     return {
       chart: {
@@ -50,7 +52,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       },
       title: {
         text: ".",
-        color: "transparent"
+        color: "transparent",
       },
       xAxis: {
         title: {
@@ -70,37 +72,40 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       plotOptions: {
         scatter: {
           tooltip: {
-            pointFormat: "<b>{point.name}</b>",
+            pointFormat: "<b>{point.name}</b><br>Type: {point.type}",
           },
         },
         series: {
-            marker: {
-              symbol: "circle",
-              radius: 4,
+          marker: {
+            symbol: "circle",
+            radius: 4,
+          },
+          states: {
+            inactive: {
+              opacity: 1,
             },
-            states: {
-              inactive: {
-                opacity: 1,
-              },
-            },
+          },
+        },
       },
-    },
       series: Object.values(seriesData),
     };
   };
 
   return (
     <div className="flex justify-center">
-    <div className="mt-6 flex flex-col lg:flex-row w-4/5">
-      <div className="lg:w-1/2 w-full lg:mr-4">
-        <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
+      <div className="mt-6 flex flex-col lg:flex-row w-4/5">
+        <div className="lg:w-1/2 w-full lg:mr-4">
+          <HighchartsReact
+            highcharts={Highcharts}
+            options={generateOptions()}
+          />
+        </div>
+        <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
+          <div className="w-2/3">
+            <ScreePlot pcaData={pcaData} />
+          </div>
+        </div>
       </div>
-      <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
-        <div className="w-2/3">
-      <ScreePlot pcaData={pcaData} />
-      </div>
-      </div>
-    </div>
     </div>
   );
 }
