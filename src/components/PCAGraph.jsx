@@ -28,8 +28,6 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         },
       };
 
-      console.log(parsedSampleInfo[0]);
-
       parsedSampleInfo.forEach((sample, idx) => {
         const point = {
           x: scoresData[idx][selectedPCs[0] - 1],
@@ -47,7 +45,8 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         type: "scatter",
       },
       title: {
-        text: "",
+        text: ".",
+        color: "transparent"
       },
       xAxis: {
         title: {
