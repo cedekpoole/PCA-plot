@@ -13,7 +13,7 @@ function ScreePlot({ pcaData }) {
         xAxis: {
             categories: Object.keys(pcaData).map(key => key.toUpperCase()), // Convert to uppercase for better labeling
             title: {
-                text: "Principle Component"
+                text: "Principal Component"
             }
         },
         yAxis: {
