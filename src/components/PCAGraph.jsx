@@ -1,5 +1,11 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import HC_exporting from "highcharts/modules/exporting";
+import highchartsAccessibility from "highcharts/modules/accessibility";
+
+// initialising Highcharts with additional modules
+highchartsAccessibility(HighCharts);
+HC_exporting(HighCharts);
 
 function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
@@ -85,7 +91,6 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
       </div>
       <div className="lg:w-1/2 w-full bg-gray-200 lg:mt-0 mt-4">
-        {/* Your second chart will go here */}
         <p>Placeholder for the second chart</p>
       </div>
     </div>
