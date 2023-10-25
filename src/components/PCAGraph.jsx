@@ -11,35 +11,38 @@ HC_exporting(Highcharts);
 function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
 
-    const conditionColors = {
-      treated: "rgb(254,125,43)",
-      untreated: "rgb(60,89,193",
-    };
+    const colorsArray = ["rgb(254,125,43)", "rgb(60,89,193)", "rgb(0,128,0)", /* Add more colors if needed */ ];
+    let colorIdx = 0;
 
-    const seriesData = {
-        treated: {
-          name: "Treated",
-          color: conditionColors.treated,
-          data: [],
-        },
-        untreated: {
-          name: "Untreated",
-          color: conditionColors.untreated,
-          data: [],
-        },
-      };
+    const seriesData = {}; 
+
+
+    // Sort the selected PCs in ascending order
+    const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
+
+    parsedSampleInfo.forEach((sample) => {
+      if (!seriesData[sample.condition]) {
+        // If this condition is not yet in seriesData, add it
+        seriesData[sample.condition] = {
+          name: sample.condition,
+          color: colorsArray[colorIdx], // Assign a color from the array
+          data: []
+        };
+
+        // Increment colorIdx so next new condition gets a different color
+        colorIdx++;
+      }
+    });
 
       parsedSampleInfo.forEach((sample, idx) => {
         const point = {
-          x: scoresData[idx][selectedPCs[0] - 1],
-          y: scoresData[idx][selectedPCs[1] - 1],
+          x: scoresData[idx][sortedPCs[0] - 1],
+          y: scoresData[idx][sortedPCs[1] - 1],
           name: Object.values(sample)[0] // This will be used in the tooltip
         };
         seriesData[sample.condition].data.push(point);
       });
 
-    // Sort the selected PCs in ascending order
-    const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
 
     return {
       chart: {
