@@ -16,12 +16,16 @@ export const runPCA = (geneData, setPcaData, setScoresData) => {
     const pc2 = explainedVariances[1];
     const pc3 = explainedVariances[2];
     const pc4 = explainedVariances[3];
+    const pc5 = explainedVariances[4];
+    const pc6 = explainedVariances[5];
 
     setPcaData({
       pc1,
       pc2,
       pc3,
       pc4,
+      pc5,
+      pc6,
     });
     setScoresData(scores);
   }

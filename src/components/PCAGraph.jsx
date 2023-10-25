@@ -2,6 +2,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HC_exporting from "highcharts/modules/exporting";
 import highchartsAccessibility from "highcharts/modules/accessibility";
+import ScreePlot from "./ScreePlot";
 
 // initialising Highcharts with additional modules
 highchartsAccessibility(Highcharts);
@@ -11,8 +12,8 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
 
     const conditionColors = {
-      treated: "red",
-      untreated: "blue",
+      treated: "rgb(254,125,43)",
+      untreated: "rgb(60,89,193",
     };
 
     const seriesData = {
@@ -27,8 +28,6 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
           data: [],
         },
       };
-
-      console.log(parsedSampleInfo[0]);
 
       parsedSampleInfo.forEach((sample, idx) => {
         const point = {
@@ -47,7 +46,8 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         type: "scatter",
       },
       title: {
-        text: "",
+        text: ".",
+        color: "transparent"
       },
       xAxis: {
         title: {
@@ -57,6 +57,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         },
       },
       yAxis: {
+        lineWidth: 1,
         title: {
           text: `PC${sortedPCs[1]} (${(
             pcaData[`pc${sortedPCs[1]}`] * 100
@@ -90,8 +91,10 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       <div className="lg:w-1/2 w-full lg:mr-4">
         <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
       </div>
-      <div className="lg:w-1/2 w-full bg-gray-200 lg:mt-0 mt-4">
-        <p>Placeholder for the second chart</p>
+      <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
+        <div className="w-2/3">
+      <ScreePlot pcaData={pcaData} />
+      </div>
       </div>
     </div>
   );
