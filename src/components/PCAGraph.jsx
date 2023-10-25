@@ -1,20 +1,40 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-function PCAGraph({ pcaData, scoresData, parsedSampleInfo }) {
+function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
+
     const conditionColors = {
       treated: "red",
       untreated: "blue",
     };
 
-    const seriesData = parsedSampleInfo.map((sample, idx) => {
-      return {
-        name: Object.keys(sample)[0], // Sample name
-        color: conditionColors[sample.condition],
-        data: [[scoresData[idx][0], scoresData[idx][1]]],
+    const seriesData = {
+        treated: {
+          name: "Treated",
+          color: conditionColors.treated,
+          data: [],
+        },
+        untreated: {
+          name: "Untreated",
+          color: conditionColors.untreated,
+          data: [],
+        },
       };
-    });
+
+      console.log(parsedSampleInfo[0]);
+
+      parsedSampleInfo.forEach((sample, idx) => {
+        const point = {
+          x: scoresData[idx][selectedPCs[0] - 1],
+          y: scoresData[idx][selectedPCs[1] - 1],
+          name: Object.values(sample)[0] // This will be used in the tooltip
+        };
+        seriesData[sample.condition].data.push(point);
+      });
+
+    // Sort the selected PCs in ascending order
+    const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
 
     return {
       chart: {
@@ -25,35 +45,46 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo }) {
       },
       xAxis: {
         title: {
-          text: `PC1 (${(pcaData.pc1 * 100).toFixed(2)}%)`,
+          text: `PC${sortedPCs[0]} (${(
+            pcaData[`pc${sortedPCs[0]}`] * 100
+          ).toFixed(2)}%)`,
         },
       },
       yAxis: {
         title: {
-          text: `PC2 (${(pcaData.pc2 * 100).toFixed(2)}%)`,
+          text: `PC${sortedPCs[1]} (${(
+            pcaData[`pc${sortedPCs[1]}`] * 100
+          ).toFixed(2)}%)`,
         },
       },
       plotOptions: {
         scatter: {
-          marker: {
-            radius: 5,
-          },
           tooltip: {
-            headerFormat: "<b>{series.name}</b><br>",
-            pointFormat: "PC1: {point.x}, PC2: {point.y}",
+            pointFormat: "<b>{point.name}</b>",
           },
         },
+        series: {
+            marker: {
+              symbol: "circle",
+              radius: 4,
+            },
+            states: {
+              inactive: {
+                opacity: 1,
+              },
+            },
       },
-      series: seriesData,
+    },
+      series: Object.values(seriesData),
     };
   };
 
   return (
     <div className="mt-6 flex flex-col lg:flex-row">
-      <div className="lg:w-3/5 w-full lg:mr-4">
+      <div className="lg:w-1/2 w-full lg:mr-4">
         <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
       </div>
-      <div className="lg:w-2/5 w-full bg-gray-200 lg:mt-0 mt-4">
+      <div className="lg:w-1/2 w-full bg-gray-200 lg:mt-0 mt-4">
         {/* Your second chart will go here */}
         <p>Placeholder for the second chart</p>
       </div>

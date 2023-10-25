@@ -4,16 +4,14 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import { FileInput, Checkbox, Button } from "@blueprintjs/core";
 import { runPCA } from "./helpers/PCAHelper";
 
-function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInfo }) {
+function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInfo, setSelectedCheckboxes, selectedCheckboxes }) {
   const geneCountRef = useRef(null);
   const sampleInfoRef = useRef(null);
 
   const [parsedCsvData, setParsedCsvData] = useState([]);
   const [selectedGeneCountName, setSelectedGeneCountName] = useState("");
   const [selectedSampleInfoName, setSelectedSampleInfoName] = useState("");
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
   
-
   useEffect(() => {
     // Logic to handle disabling/enabling checkboxes
     if (selectedCheckboxes.length >= 2) {
@@ -61,6 +59,7 @@ function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInf
     } else {
       setSelectedCheckboxes([...selectedCheckboxes, value]);
     }
+    
   };
 
   const handleSubmit = (event) => {
