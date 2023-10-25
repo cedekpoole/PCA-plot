@@ -4,8 +4,8 @@ import HC_exporting from "highcharts/modules/exporting";
 import highchartsAccessibility from "highcharts/modules/accessibility";
 
 // initialising Highcharts with additional modules
-highchartsAccessibility(HighCharts);
-HC_exporting(HighCharts);
+highchartsAccessibility(Highcharts);
+HC_exporting(Highcharts);
 
 function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   const generateOptions = () => {
