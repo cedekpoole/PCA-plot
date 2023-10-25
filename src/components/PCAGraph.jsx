@@ -2,6 +2,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HC_exporting from "highcharts/modules/exporting";
 import highchartsAccessibility from "highcharts/modules/accessibility";
+import ScreePlot from "./ScreePlot";
 
 // initialising Highcharts with additional modules
 highchartsAccessibility(Highcharts);
@@ -89,8 +90,10 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       <div className="lg:w-1/2 w-full lg:mr-4">
         <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
       </div>
-      <div className="lg:w-1/2 w-full bg-gray-200 lg:mt-0 mt-4">
-        <p>Placeholder for the second chart</p>
+      <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
+        <div className="w-2/3">
+      <ScreePlot pcaData={pcaData} />
+      </div>
       </div>
     </div>
   );
