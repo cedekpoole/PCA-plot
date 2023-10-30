@@ -6,6 +6,7 @@ import { useState } from "react";
 function App() {
   const [showChart, setShowChart] = useState(false);
   const [pcaData, setPcaData] = useState([]);
+  console.log(pcaData)
   const [scoresData, setScoresData] = useState([]);
   const [parsedSampleInfo, setParsedSampleInfo] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
@@ -25,11 +26,11 @@ function App() {
             <div className="lg:w-1/2 w-full lg:mr-4">
               {selectedCheckboxes.length === 2 && (
                 <PCAGraph
-                pcaData={pcaData}
-                scoresData={scoresData}
-                parsedSampleInfo={parsedSampleInfo}
-                selectedPCs={selectedCheckboxes}
-              />
+                  pcaData={pcaData}
+                  scoresData={scoresData}
+                  parsedSampleInfo={parsedSampleInfo}
+                  selectedPCs={selectedCheckboxes}
+                />
               )}
             </div>
             <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
