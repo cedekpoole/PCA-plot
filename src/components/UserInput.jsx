@@ -4,7 +4,7 @@ import "@blueprintjs/core/lib/css/blueprint.css";
 import { FileInput, Checkbox, Button } from "@blueprintjs/core";
 import { runPCA } from "./helpers/PCAHelper";
 
-function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInfo, setSelectedCheckboxes, selectedCheckboxes }) {
+function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInfo, setSelectedCheckboxes, selectedCheckboxes, setTopGenes }) {
   const geneCountRef = useRef(null);
   const sampleInfoRef = useRef(null);
 
@@ -64,7 +64,7 @@ function UserInput({ setShowChart, setPcaData, setScoresData, setParsedSampleInf
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    runPCA(parsedCsvData, setPcaData, setScoresData)
+    runPCA(parsedCsvData, setPcaData, setScoresData, setTopGenes)
     setShowChart(true);
   };
 

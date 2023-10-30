@@ -1,6 +1,6 @@
 import { PCA } from "ml-pca";
 
-export const runPCA = (geneData, setPcaData, setScoresData) => {
+export const runPCA = (geneData, setPcaData, setScoresData, setTopGenes) => {
   const transpose = (arr) => {
     return arr[0].map((_, colIndex) => arr.map((row) => row[colIndex]));
   };
@@ -10,6 +10,14 @@ export const runPCA = (geneData, setPcaData, setScoresData) => {
     const transposedMatrix = transpose(matrix);
     const pca = new PCA(transposedMatrix);
     const scores = pca.predict(transposedMatrix).data;
+    const loadings = pca.getLoadings().data;
+    const geneNames = geneData.map((row) => row.gene_id);
+
+    const topGenes = loadings.map((pc, index) => {
+      const geneLoadings = geneNames.map((gene, i) => ({ gene, loading: pc[i] }));
+      const sortedGenes = geneLoadings.sort((a, b) => Math.abs(b.loading) - Math.abs(a.loading));
+      return sortedGenes.slice(0, 10);
+    });
 
     const explainedVariances = pca.getExplainedVariance();
     const pc1 = explainedVariances[0];
@@ -27,6 +35,8 @@ export const runPCA = (geneData, setPcaData, setScoresData) => {
       pc5,
       pc6,
     });
+  
     setScoresData(scores);
+    setTopGenes(topGenes);
   }
 };

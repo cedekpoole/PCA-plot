@@ -1,5 +1,6 @@
 import UserInput from "./components/UserInput";
 import PCAGraph from "./components/PCAGraph";
+import ScreePlot from "./components/ScreePlot";
 import { useState } from "react";
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
   const [scoresData, setScoresData] = useState([]);
   const [parsedSampleInfo, setParsedSampleInfo] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
+  const [topGenes, setTopGenes] = useState([]);
+
   return (
     <>
       <UserInput
@@ -17,14 +20,34 @@ function App() {
         setParsedSampleInfo={setParsedSampleInfo}
         setSelectedCheckboxes={setSelectedCheckboxes}
         selectedCheckboxes={selectedCheckboxes}
+        setTopGenes={setTopGenes}
       />
       {showChart && (
-        <PCAGraph
-          pcaData={pcaData}
-          scoresData={scoresData}
-          parsedSampleInfo={parsedSampleInfo}
-          selectedPCs={selectedCheckboxes}
-        />
+        <div className="flex justify-center">
+          <div className="mt-6 flex flex-col lg:flex-row w-4/5">
+            <div className="lg:w-1/2 w-full lg:mr-4">
+              {selectedCheckboxes.length === 2 && (
+                <PCAGraph
+                  pcaData={pcaData}
+                  scoresData={scoresData}
+                  parsedSampleInfo={parsedSampleInfo}
+                  selectedPCs={selectedCheckboxes}
+                />
+              )}
+            </div>
+            <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
+              <div className="flex justify-center">
+              <div className="w-2/3">
+                <ScreePlot pcaData={pcaData} />
+              </div>
+              <div className="w-1/3">
+                <h2 className="text-center text-lg font-bold">Top Genes</h2>
+
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
