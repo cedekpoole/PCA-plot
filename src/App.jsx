@@ -10,7 +10,15 @@ function App() {
   const [parsedSampleInfo, setParsedSampleInfo] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
   const [topGenes, setTopGenes] = useState([]);
+  const [selectedPCIndex, setSelectedPCIndex] = useState(null);
+  const [topGenesList, setTopGenesList] = useState([]);
 
+  const handleSelectPC = (index) => {
+    if (topGenes[index]) {
+      setTopGenesList(topGenes[index]);
+      setSelectedPCIndex(index + 1);
+    }
+  };
   return (
     <>
       <UserInput
@@ -37,13 +45,25 @@ function App() {
             </div>
             <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
               <div className="flex justify-center">
-              <div className="w-2/3">
-                <ScreePlot pcaData={pcaData} />
-              </div>
-              <div className="w-1/3">
-                <h2 className="text-center text-lg font-bold">Top Genes</h2>
-
-              </div>
+                <div className="w-2/3">
+                  <ScreePlot pcaData={pcaData} onSelectPC={handleSelectPC} />
+                </div>
+                <div className="w-1/3 pl-4 pt-4">
+                  {selectedPCIndex && (
+                    <div>
+                      <h2 className="text-center text-lg font-bold">
+                        Top Genes (PC{selectedPCIndex}):
+                      </h2>
+                      <ul>
+                        {topGenesList.map((gene, index) => (
+                          <li key={index}>
+                            {index + 1}. {gene.gene}: {gene.loading.toFixed(2)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
