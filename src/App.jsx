@@ -6,10 +6,11 @@ import { useState } from "react";
 function App() {
   const [showChart, setShowChart] = useState(false);
   const [pcaData, setPcaData] = useState([]);
-  console.log(pcaData)
   const [scoresData, setScoresData] = useState([]);
   const [parsedSampleInfo, setParsedSampleInfo] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(["1", "2"]);
+  const [topGenes, setTopGenes] = useState([]);
+
   return (
     <>
       <UserInput
@@ -19,6 +20,7 @@ function App() {
         setParsedSampleInfo={setParsedSampleInfo}
         setSelectedCheckboxes={setSelectedCheckboxes}
         selectedCheckboxes={selectedCheckboxes}
+        setTopGenes={setTopGenes}
       />
       {showChart && (
         <div className="flex justify-center">
@@ -34,8 +36,14 @@ function App() {
               )}
             </div>
             <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
+              <div className="flex justify-center">
               <div className="w-2/3">
                 <ScreePlot pcaData={pcaData} />
+              </div>
+              <div className="w-1/3">
+                <h2 className="text-center text-lg font-bold">Top Genes</h2>
+
+              </div>
               </div>
             </div>
           </div>
