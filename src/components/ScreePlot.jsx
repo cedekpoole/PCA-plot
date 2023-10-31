@@ -40,6 +40,9 @@ function ScreePlot({ pcaData, onSelectPC }) {
         },
       },
     },
+    legend: {
+        enabled: false,
+    },
     series: [
       {
         name: "Variance",
