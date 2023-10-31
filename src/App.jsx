@@ -1,6 +1,7 @@
 import UserInput from "./components/UserInput";
 import PCAGraph from "./components/PCAGraph";
 import ScreePlot from "./components/ScreePlot";
+import GeneTable from "./components/GeneTable";
 import { useState } from "react";
 
 function App() {
@@ -54,13 +55,7 @@ function App() {
                       <h2 className="text-center text-lg font-bold">
                         Top Genes (PC{selectedPCIndex}):
                       </h2>
-                      <ul>
-                        {topGenesList.map((gene, index) => (
-                          <li key={index}>
-                            {index + 1}. {gene.gene}: {gene.loading.toFixed(2)}
-                          </li>
-                        ))}
-                      </ul>
+                      <GeneTable topGenes={topGenesList}/>
                     </div>
                   )}
                 </div>
