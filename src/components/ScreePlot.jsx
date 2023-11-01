@@ -41,7 +41,7 @@ function ScreePlot({ pcaData, onSelectPC }) {
       },
     },
     legend: {
-        enabled: false,
+      enabled: false,
     },
     series: [
       {

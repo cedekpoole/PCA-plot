@@ -1,9 +1,8 @@
 import { HTMLTable } from "@blueprintjs/core";
 
 function TopGenesTable({ topGenes }) {
-
   return (
-    <HTMLTable striped={true} style={{ width: "100%" }}>
+    <HTMLTable striped={true} className="w-full text-xs">
       <thead>
         <tr>
           <th>#</th>
