@@ -91,9 +91,13 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
   };
 
   return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={generateOptions()} />
-    </div>
+<div className="h-[600px] w-full"> 
+    <HighchartsReact 
+      highcharts={Highcharts} 
+      options={generateOptions()} 
+      containerProps={{ className: "h-full"}} 
+    />
+  </div>
   );
 }
 

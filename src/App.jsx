@@ -39,8 +39,8 @@ function App() {
       />
       {showChart && (
         <div className="flex justify-center">
-          <div className="mt-6 flex flex-col lg:flex-row w-5/6">
-            <div className="lg:w-1/2 w-full lg:mr-4">
+          <div className="mt-6 flex flex-col lg:flex-row w-5/6 lg:-ml-10">
+            <div className="lg:w-2/3 w-full lg:mr-4">
               {selectedCheckboxes.length === 2 && (
                 <PCAGraph
                   pcaData={pcaData}
@@ -50,12 +50,11 @@ function App() {
                 />
               )}
             </div>
-            <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
+            <div className="lg:w-1/3 w-full lg:mt-0 mt-4 lg:self-center lg:mb-11">
               <div className="flex justify-center">
-                <div className="w-2/3">
+                <div className="w-96">
                   <ScreePlot pcaData={pcaData} onSelectPC={handleSelectPC} />
                 </div>
-                <div>
                   {selectedPCIndex && (
                     <Dialog
                       isOpen={showModal}
@@ -83,7 +82,6 @@ function App() {
                       />
                     </Dialog>
                   )}
-                </div>
               </div>
             </div>
           </div>
