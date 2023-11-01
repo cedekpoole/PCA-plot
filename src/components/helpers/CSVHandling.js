@@ -10,7 +10,7 @@ export const parseCSVData = (file, setCSVData) => {
   });
 };
 
-export const downloadCSV = (topGenesList, selectedPCIndex) => {
+export const downloadCSV = (topGenesList, selectedPCIndex, percentage) => {
   const csvRows = [
     ["#", "Gene", "Loading"], // CSV Header
     ...topGenesList.map((geneData, index) => [
@@ -22,5 +22,5 @@ export const downloadCSV = (topGenesList, selectedPCIndex) => {
 
   const csvString = csvRows.map((row) => row.join(",")).join("\n");
   const blob = new Blob([csvString], { type: "text/csv" });
-  saveAs(blob, `Top_Genes_PC${selectedPCIndex}.csv`);
+  saveAs(blob, `Top_Genes_PC${selectedPCIndex}_${percentage}%.csv`);
 };

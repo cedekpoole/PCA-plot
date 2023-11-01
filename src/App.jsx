@@ -73,7 +73,8 @@ function App() {
                         actions={
                           <Button
                             onClick={() =>
-                              downloadCSV(topGenesList, selectedPCIndex)
+                              downloadCSV(topGenesList, selectedPCIndex, (Object.values(pcaData)[selectedPCIndex - 1] * 100
+                              ).toFixed(2))
                             }
                           >
                             Download
