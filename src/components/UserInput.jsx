@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { parseCSVData } from "./helpers/CSVHandling";
-import "@blueprintjs/core/lib/css/blueprint.css";
 import { FileInput, Checkbox, Button } from "@blueprintjs/core";
 import { runPCA } from "./helpers/PCAHelper";
 
