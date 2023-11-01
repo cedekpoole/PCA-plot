@@ -63,7 +63,9 @@ function App() {
                       title={`Top Genes (PC${selectedPCIndex}):`}
                     >
                       <DialogBody>
+                        <div className="max-h-[70%] overflow-y-auto">
                         <GeneTable topGenes={topGenesList} />
+                        </div>
                       </DialogBody>
                       <DialogFooter
                         actions={

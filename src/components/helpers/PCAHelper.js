@@ -16,7 +16,7 @@ export const runPCA = (geneData, setPcaData, setScoresData, setTopGenes) => {
     const topGenes = loadings.map((pc, index) => {
       const geneLoadings = geneNames.map((gene, i) => ({ gene, loading: pc[i] }));
       const sortedGenes = geneLoadings.sort((a, b) => Math.abs(b.loading) - Math.abs(a.loading));
-      return sortedGenes.slice(0, 10);
+      return sortedGenes.slice(0, 100);
     });
 
     const explainedVariances = pca.getExplainedVariance();
