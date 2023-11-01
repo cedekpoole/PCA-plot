@@ -40,7 +40,7 @@ function App() {
       {showChart && (
         <div className="flex justify-center">
           <div className="mt-6 flex flex-col lg:flex-row w-5/6">
-            <div className="lg:w-2/5 w-full lg:mr-4">
+            <div className="lg:w-1/2 w-full lg:mr-4">
               {selectedCheckboxes.length === 2 && (
                 <PCAGraph
                   pcaData={pcaData}
@@ -50,28 +50,31 @@ function App() {
                 />
               )}
             </div>
-            <div className="lg:w-3/5 w-full lg:mt-0 mt-4">
+            <div className="lg:w-1/2 w-full lg:mt-0 mt-4">
               <div className="flex justify-center">
                 <div className="w-2/3">
                   <ScreePlot pcaData={pcaData} onSelectPC={handleSelectPC} />
                 </div>
-                <div className="w-1/3 pl-4 pt-4">
+                <div>
                   {selectedPCIndex && (
                     <Dialog
                       isOpen={showModal}
                       onClose={closeModal}
-                      title={`Top Genes (PC${selectedPCIndex}):`}
+                      title={`Top Genes (PC${selectedPCIndex}: ${(
+                        Object.values(pcaData)[selectedPCIndex - 1] * 100
+                      ).toFixed(2)}%):`}
                     >
                       <DialogBody>
                         <div className="max-h-[70%] overflow-y-auto">
-                        <GeneTable topGenes={topGenesList} />
+                          <GeneTable topGenes={topGenesList} />
                         </div>
                       </DialogBody>
                       <DialogFooter
                         actions={
                           <Button
                             onClick={() =>
-                              downloadCSV(topGenesList, selectedPCIndex)
+                              downloadCSV(topGenesList, selectedPCIndex, (Object.values(pcaData)[selectedPCIndex - 1] * 100
+                              ).toFixed(2))
                             }
                           >
                             Download
