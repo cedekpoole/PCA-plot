@@ -65,7 +65,17 @@ function App() {
                       <DialogBody>
                         <GeneTable topGenes={topGenesList} />
                       </DialogBody>
-                      <DialogFooter actions={<Button onClick={() => downloadCSV(topGenesList, selectedPCIndex)}>Download</Button>}/>
+                      <DialogFooter
+                        actions={
+                          <Button
+                            onClick={() =>
+                              downloadCSV(topGenesList, selectedPCIndex)
+                            }
+                          >
+                            Download
+                          </Button>
+                        }
+                      />
                     </Dialog>
                   )}
                 </div>
