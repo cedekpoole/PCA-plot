@@ -2,6 +2,7 @@ import UserInput from "./components/UserInput";
 import PCAGraph from "./components/PCAGraph";
 import ScreePlot from "./components/ScreePlot";
 import GeneTable from "./components/GeneTable";
+import { downloadCSV } from "./components/helpers/CSVHandling";
 import { useState } from "react";
 import { Button, Dialog, DialogBody, DialogFooter } from "@blueprintjs/core";
 
@@ -64,7 +65,7 @@ function App() {
                       <DialogBody>
                         <GeneTable topGenes={topGenesList} />
                       </DialogBody>
-                      <DialogFooter actions={<Button >Download</Button>}/>
+                      <DialogFooter actions={<Button onClick={() => downloadCSV(topGenesList, selectedPCIndex)}>Download</Button>}/>
                     </Dialog>
                   )}
                 </div>
