@@ -84,6 +84,23 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
               opacity: 1,
             },
           },
+          cursor: "pointer",
+          dataLabels: {
+            enabled: true, // Enable data labels by default
+            format: "{point.name}", // Display the point name
+            allowOverlap: true, // Allow labels to overlap
+          },
+          point: {
+            events: {
+              click: function () {
+                // Toggle the visibility of the data label on click
+                this.dataLabel.attr({
+                  visibility: this.dataLabel.visible ? "hidden" : "visible",
+                });
+                this.dataLabel.visible = !this.dataLabel.visible;
+              },
+            },
+          },
         },
       },
       series: Object.values(seriesData),
