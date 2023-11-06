@@ -40,7 +40,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         x: scoresData[idx][sortedPCs[0] - 1],
         y: scoresData[idx][sortedPCs[1] - 1],
         name: Object.values(sample)[0],
-        type: Object.values(sample)[2],
+        ...sample
       };
       seriesData[sample.condition].data.push(point);
     });
