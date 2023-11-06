@@ -27,7 +27,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       if (!seriesData[sample.condition]) {
         seriesData[sample.condition] = {
           name: sample.condition,
-          color: colorsArray[colorIdx], // Assign a color from the array
+          color: colorsArray[colorIdx % colorsArray.length], // Assign a color from the array
           data: [],
         };
 
@@ -40,32 +40,32 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
         x: scoresData[idx][sortedPCs[0] - 1],
         y: scoresData[idx][sortedPCs[1] - 1],
         name: Object.values(sample)[0],
-        id: 'point' + idx, // Unique ID for the point
+        id: "point" + idx, // Unique ID for the point
         ...sample,
       };
       seriesData[sample.condition].data.push(point);
-      
+
       // Add a default annotation for each point
       initialAnnotations.push({
         labels: [
           {
-            point: 'point' + idx,
+            point: "point" + idx,
             text: point.name,
-            backgroundColor: 'rgba(255,255,255,0.5)',
-            borderColor: 'black',
-            shape: 'connector',
-            overflow: 'justify',
+            backgroundColor: "rgba(255,255,255,0.5)",
+            borderColor: "black",
+            shape: "connector",
+            overflow: "justify",
             crop: true,
           },
         ],
         labelOptions: {
-          shape: 'connector',
-          align: 'right',
+          shape: "connector",
+          align: "right",
           justify: false,
           crop: true,
           style: {
-            fontSize: '0.7em',
-            textOutline: '1px white',
+            fontSize: "0.7em",
+            textOutline: "1px white",
           },
           allowOverlap: true,
         },
@@ -79,10 +79,12 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
           load: function () {
             // Add default annotations on load
             this.annotations.forEach((annotation) => {
-              annotation.labels[0].options.point = this.get(annotation.labels[0].options.point);
+              annotation.labels[0].options.point = this.get(
+                annotation.labels[0].options.point
+              );
             });
-          }
-        }
+          },
+        },
       },
       title: {
         text: ".",
@@ -90,13 +92,17 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       },
       xAxis: {
         title: {
-          text: `PC${sortedPCs[0]} (${(pcaData[`pc${sortedPCs[0]}`] * 100).toFixed(2)}%)`,
+          text: `PC${sortedPCs[0]} (${(
+            pcaData[`pc${sortedPCs[0]}`] * 100
+          ).toFixed(2)}%)`,
         },
       },
       yAxis: {
         lineWidth: 1,
         title: {
-          text: `PC${sortedPCs[1]} (${(pcaData[`pc${sortedPCs[1]}`] * 100).toFixed(2)}%)`,
+          text: `PC${sortedPCs[1]} (${(
+            pcaData[`pc${sortedPCs[1]}`] * 100
+          ).toFixed(2)}%)`,
         },
       },
       plotOptions: {
@@ -121,7 +127,11 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
               click: function () {
                 const chart = this.series.chart;
                 // Check if the point already has an annotation
-                const annotation = chart.annotations.find((a) => a.labels[0].options.point.x === this.x && a.labels[0].options.point.y === this.y);
+                const annotation = chart.annotations.find(
+                  (a) =>
+                    a.labels[0].options.point.x === this.x &&
+                    a.labels[0].options.point.y === this.y
+                );
                 if (annotation) {
                   // Remove the existing annotation
                   chart.removeAnnotation(annotation);
@@ -132,21 +142,21 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
                       {
                         point: this,
                         text: this.name,
-                        backgroundColor: 'rgba(255,255,255,0.5)',
-                        borderColor: 'black',
-                        shape: 'connector',
-                        overflow: 'justify',
+                        backgroundColor: "rgba(255,255,255,0.5)",
+                        borderColor: "black",
+                        shape: "connector",
+                        overflow: "justify",
                         crop: true,
                       },
                     ],
                     labelOptions: {
-                      shape: 'connector',
-                      align: 'right',
+                      shape: "connector",
+                      align: "right",
                       justify: false,
                       crop: true,
                       style: {
-                        fontSize: '0.7em',
-                        textOutline: '1px white',
+                        fontSize: "0.7em",
+                        textOutline: "1px white",
                       },
                       allowOverlap: true,
                     },
