@@ -65,6 +65,7 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
           crop: true,
           style: {
             fontSize: "0.7em",
+            fontWeight: "bold",
             textOutline: "1px white",
           },
           allowOverlap: true,
