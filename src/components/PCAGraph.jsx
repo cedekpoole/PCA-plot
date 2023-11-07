@@ -46,10 +46,10 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
 
     // Add a default annotation for each point
     initialAnnotations.push({
-      id: 'annotation-point' + idx, // Unique ID for the annotation
+      id: "annotation-point" + idx, // Unique ID for the annotation
       labels: [
         {
-          point: 'point' + idx,
+          point: "point" + idx,
           text: point.name,
           backgroundColor: "rgba(255,255,255,0.5)",
           borderColor: "black",
@@ -72,106 +72,108 @@ function PCAGraph({ pcaData, scoresData, parsedSampleInfo, selectedPCs }) {
       },
     });
   });
-  
+
   const options = {
-      chart: {
-        type: "scatter",
-        events: {
-          load: function () {
-            // Add default annotations on load
-            this.annotations.forEach((annotation) => {
-              annotation.labels[0].options.point = this.get(
-                annotation.labels[0].options.point
-              );
-            });
-          },
+    chart: {
+      type: "scatter",
+      events: {
+        load: function () {
+          // Add default annotations on load
+          this.annotations.forEach((annotation) => {
+            annotation.labels[0].options.point = this.get(
+              annotation.labels[0].options.point
+            );
+          });
         },
       },
+    },
+    title: {
+      text: ".",
+      color: "transparent",
+    },
+    xAxis: {
       title: {
-        text: ".",
-        color: "transparent",
+        text: `PC${sortedPCs[0]} (${(
+          pcaData[`pc${sortedPCs[0]}`] * 100
+        ).toFixed(2)}%)`,
       },
-      xAxis: {
-        title: {
-          text: `PC${sortedPCs[0]} (${(
-            pcaData[`pc${sortedPCs[0]}`] * 100
-          ).toFixed(2)}%)`,
+    },
+    yAxis: {
+      lineWidth: 1,
+      title: {
+        text: `PC${sortedPCs[1]} (${(
+          pcaData[`pc${sortedPCs[1]}`] * 100
+        ).toFixed(2)}%)`,
+      },
+    },
+    tooltip: {
+      hideDelay: 200,
+    },
+    plotOptions: {
+      scatter: {
+        tooltip: {
+          pointFormat: "<b>{point.name}</b><br>Type: {point.type}",
         },
       },
-      yAxis: {
-        lineWidth: 1,
-        title: {
-          text: `PC${sortedPCs[1]} (${(
-            pcaData[`pc${sortedPCs[1]}`] * 100
-          ).toFixed(2)}%)`,
+      series: {
+        marker: {
+          symbol: "circle",
+          radius: 4,
         },
-      },
-      tooltip: {
-        hideDelay: 200,
-      },
-      plotOptions: {
-        scatter: {
-          tooltip: {
-            pointFormat: "<b>{point.name}</b><br>Type: {point.type}",
+        states: {
+          inactive: {
+            opacity: 1,
           },
         },
-        series: {
-          marker: {
-            symbol: "circle",
-            radius: 4,
-          },
-          states: {
-            inactive: {
-              opacity: 1,
-            },
-          },
-          cursor: "pointer",
-          point: {
-            events: {
-              click: function () {
-                const chart = this.series.chart;
-                // Use point's ID to find the associated annotation
-                const annotation = chart.annotations.find((a) => a.options.id === 'annotation-' + this.id);
-                if (annotation) {
-                  // Remove the existing annotation using the annotation's ID
-                  chart.removeAnnotation(annotation.options.id);
-                } else {
-                  // Add a new annotation with a unique ID
-                  chart.addAnnotation({
-                    id: 'annotation-' + this.id, // Unique ID for the annotation
-                    labels: [
-                      {
-                        point: this.id, // Use the point ID to refer to the point
-                        text: this.name,
-                        backgroundColor: "rgba(255,255,255,0.5)",
-                        borderColor: "black",
-                        shape: "connector",
-                        overflow: "justify",
-                        crop: true,
-                      },
-                    ],
-                    labelOptions: {
+        cursor: "pointer",
+        point: {
+          events: {
+            click: function () {
+              const chart = this.series.chart;
+              // Use point's ID to find the associated annotation
+              const annotation = chart.annotations.find(
+                (a) => a.options.id === "annotation-" + this.id
+              );
+              if (annotation) {
+                // Remove the existing annotation using the annotation's ID
+                chart.removeAnnotation(annotation.options.id);
+              } else {
+                // Add a new annotation with a unique ID
+                chart.addAnnotation({
+                  id: "annotation-" + this.id, // Unique ID for the annotation
+                  labels: [
+                    {
+                      point: this.id, // Use the point ID to refer to the point
+                      text: this.name,
+                      backgroundColor: "rgba(255,255,255,0.5)",
+                      borderColor: "black",
                       shape: "connector",
-                      align: "right",
-                      justify: false,
+                      overflow: "justify",
                       crop: true,
-                      style: {
-                        fontSize: "0.7em",
-                        fontWeight: "bold",
-                        textOutline: "1px white",
-                      },
-                      allowOverlap: true,
                     },
-                  });
-                }
-              },
+                  ],
+                  labelOptions: {
+                    shape: "connector",
+                    align: "right",
+                    justify: false,
+                    crop: true,
+                    style: {
+                      fontSize: "0.7em",
+                      fontWeight: "bold",
+                      textOutline: "1px white",
+                    },
+                    allowOverlap: true,
+                  },
+                });
+              }
             },
           },
         },
       },
-      series: Object.values(seriesData),
-      annotations: initialAnnotations, // Include the default annotations
-    };
+    },
+    series: Object.values(seriesData),
+    annotations: initialAnnotations, // Include the default annotations
+  };
 
   return (
     <div className="h-[600px] w-full">
