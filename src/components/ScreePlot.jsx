@@ -8,7 +8,9 @@ function ScreePlot({ pcaData, onSelectPC }) {
     },
     title: {
       text: ".",
-      color: "transparent",
+      style: {
+        color: "transparent",
+      }
     },
     xAxis: {
       categories: Object.keys(pcaData).map((key) => key.toUpperCase()), // Convert to uppercase for better labeling

@@ -46,14 +46,13 @@ function App() {
         <div className="flex justify-center">
           <div className="mt-6 flex flex-col lg:flex-row w-5/6 lg:-ml-10">
             <div className="lg:w-2/3 w-full lg:mr-4">
+            <label className="ml-20 inline mr-3">Colour By:</label>
             <HTMLSelect // Add this right before the PCAGraph component
             options={Object.keys(parsedSampleInfo[0] || {}).filter(
               (key) => key !== "name"
             ).slice(1).map((key) => ({ label: key, value: key }))}
             value={colorBy}
             onChange={handleColorByChange}
-            fill={true}
-            className="mb-3"
           />
               {selectedCheckboxes.length === 2 && (
                 <PCAGraph

@@ -100,7 +100,9 @@ function PCAGraph({
     },
     title: {
       text: ".",
-      color: "transparent",
+      style: {
+        color: "transparent",
+      }
     },
     xAxis: {
       title: {
