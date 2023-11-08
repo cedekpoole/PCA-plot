@@ -42,7 +42,9 @@ function PCAGraph({
   const colorsArray = [
     "rgb(254,125,43)",
     "rgb(60,89,193)",
-    "rgb(0,128,0)", // Add more colors if needed
+    "rgb(0,158,115)", 
+    "rgb(247,72, 165)",
+    "rgb(240,228,66)", // Add more colors if needed
   ];
 
   useEffect(() => {
@@ -135,6 +137,9 @@ function PCAGraph({
       tooltip: {
         hideDelay: 200,
       },
+      legend: {
+        verticalAlign: "top",
+      },
       plotOptions: {
         scatter: {
           tooltip: {
@@ -209,7 +214,7 @@ function PCAGraph({
     scoresData,
     parsedSampleInfo,
     selectedPCs,
-  ]); // Rerun when colorBy changes
+  ]); 
 
   return (
     <div className="h-[600px] w-full">
