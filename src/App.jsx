@@ -4,7 +4,7 @@ import ScreePlot from "./components/ScreePlot";
 import GeneTable from "./components/GeneTable";
 import { downloadCSV } from "./components/helpers/CSVHandling";
 import { useState } from "react";
-import { Button, Dialog, DialogBody, DialogFooter } from "@blueprintjs/core";
+import { Button, Dialog, DialogBody, DialogFooter, HTMLSelect } from "@blueprintjs/core";
 
 function App() {
   const [showChart, setShowChart] = useState(false);
@@ -16,6 +16,11 @@ function App() {
   const [selectedPCIndex, setSelectedPCIndex] = useState(null);
   const [topGenesList, setTopGenesList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [colorBy, setColorBy] = useState("condition");
+
+  const handleColorByChange = (event) => {
+    setColorBy(event.target.value);
+  };
 
   const closeModal = () => setShowModal(false);
 
@@ -41,12 +46,22 @@ function App() {
         <div className="flex justify-center">
           <div className="mt-6 flex flex-col lg:flex-row w-5/6 lg:-ml-10">
             <div className="lg:w-2/3 w-full lg:mr-4">
+            <HTMLSelect // Add this right before the PCAGraph component
+            options={Object.keys(parsedSampleInfo[0] || {}).filter(
+              (key) => key !== "name"
+            ).slice(1).map((key) => ({ label: key, value: key }))}
+            value={colorBy}
+            onChange={handleColorByChange}
+            fill={true}
+            className="mb-3"
+          />
               {selectedCheckboxes.length === 2 && (
                 <PCAGraph
                   pcaData={pcaData}
                   scoresData={scoresData}
                   parsedSampleInfo={parsedSampleInfo}
                   selectedPCs={selectedCheckboxes}
+                  colorBy={colorBy}
                 />
               )}
             </div>
