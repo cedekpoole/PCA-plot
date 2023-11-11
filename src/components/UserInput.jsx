@@ -111,6 +111,16 @@ function UserInput({
             data-testid="input2"
           />
         </div>
+        <div className="flex justify-center items-center mt-6">
+        <label className="inline mr-3">Colour By:</label>
+            <HTMLSelect // Add this right before the PCAGraph component
+            options={Object.keys(parsedSampleInfo[0] || {}).filter(
+              (key) => key !== "name"
+            ).slice(1).map((key) => ({ label: key, value: key }))}
+            value={colorBy}
+            onChange={handleColorByChange}
+          />
+          </div>
         <div className="flex gap-4 justify-center mt-6">
           <Checkbox
             label="PC1"
@@ -137,14 +147,6 @@ function UserInput({
             onChange={handleCheckboxChange}
           />
         </div>
-        <label className="ml-20 inline mr-3">Colour By:</label>
-            <HTMLSelect // Add this right before the PCAGraph component
-            options={Object.keys(parsedSampleInfo[0] || {}).filter(
-              (key) => key !== "name"
-            ).slice(1).map((key) => ({ label: key, value: key }))}
-            value={colorBy}
-            onChange={handleColorByChange}
-          />
       </form>
     </div>
   );
