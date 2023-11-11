@@ -38,6 +38,12 @@ function UserInput({
     }
   }, [selectedCheckboxes]);
 
+  useEffect(() => {
+    if (selectedGeneCountName && selectedSampleInfoName) {
+      handleSubmit();
+    }
+  }, [selectedGeneCountName, selectedSampleInfoName])
+
   const handleFileChange = (e, identifier) => {
     setShowChart(false);
 
@@ -68,15 +74,14 @@ function UserInput({
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     runPCA(parsedCsvData, setPcaData, setScoresData, setTopGenes);
     setShowChart(true);
   };
 
   return (
     <div data-testid="user-input">
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="flex justify-center space-x-4 pt-10 flex-wrap">
           <FileInput
             text={selectedGeneCountName || "Upload data..."}
@@ -124,11 +129,6 @@ function UserInput({
             checked={selectedCheckboxes.includes("4")}
             onChange={handleCheckboxChange}
           />
-        </div>
-        <div className="flex justify-center mt-4">
-          <Button type="submit" disabled={selectedCheckboxes.length !== 2}>
-            Submit
-          </Button>
         </div>
       </form>
     </div>
