@@ -1,16 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { parseCSVData } from "./helpers/CSVHandling";
-import { FileInput, Checkbox, Button } from "@blueprintjs/core";
+import { FileInput, Checkbox, HTMLSelect } from "@blueprintjs/core";
 import { runPCA } from "./helpers/PCAHelper";
 
 function UserInput({
   setShowChart,
   setPcaData,
   setScoresData,
+  parsedSampleInfo,
   setParsedSampleInfo,
   setSelectedCheckboxes,
   selectedCheckboxes,
   setTopGenes,
+  colorBy,
+  setColorBy,
 }) {
   const geneCountRef = useRef(null);
   const sampleInfoRef = useRef(null);
@@ -79,6 +82,10 @@ function UserInput({
     setShowChart(true);
   };
 
+  const handleColorByChange = (event) => {
+    setColorBy(event.target.value);
+  };
+
   return (
     <div data-testid="user-input">
       <form>
@@ -130,6 +137,14 @@ function UserInput({
             onChange={handleCheckboxChange}
           />
         </div>
+        <label className="ml-20 inline mr-3">Colour By:</label>
+            <HTMLSelect // Add this right before the PCAGraph component
+            options={Object.keys(parsedSampleInfo[0] || {}).filter(
+              (key) => key !== "name"
+            ).slice(1).map((key) => ({ label: key, value: key }))}
+            value={colorBy}
+            onChange={handleColorByChange}
+          />
       </form>
     </div>
   );
