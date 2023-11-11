@@ -97,8 +97,6 @@ function PCAGraph({
       });
     });
 
-    console.log(seriesData);
-
     const newOptions = {
       chart: {
         type: "scatter",
