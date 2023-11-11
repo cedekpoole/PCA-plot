@@ -89,28 +89,42 @@ function UserInput({
   return (
     <div data-testid="user-input">
       <form>
-        <div className="flex justify-center space-x-4 pt-10 flex-wrap">
-          <FileInput
-            text={selectedGeneCountName || "Upload data..."}
-            inputProps={{
-              accept: ".csv",
-              ref: geneCountRef,
-              required: true,
-            }}
-            onInputChange={(e) => handleFileChange(e, "geneCount")}
-            data-testid="input1"
-          />
-          <FileInput
-            text={selectedSampleInfoName || "Experimental design table..."}
-            inputProps={{
-              accept: ".csv",
-              ref: sampleInfoRef,
-              required: true,
-            }}
-            onInputChange={(e) => handleFileChange(e, "sampleInfo")}
-            data-testid="input2"
-          />
-        </div>
+      <div className="flex flex-col items-center space-y-4 pt-10">
+  <div className="grid grid-cols-2 gap-4 items-center">
+    <label htmlFor="dataFile" className="text-right">
+      Upload your data file
+    </label>
+    <FileInput
+      className="w-400"
+      text={selectedGeneCountName || "Upload data..."}
+      inputProps={{
+        id: "dataFile",
+        accept: ".csv",
+        ref: geneCountRef,
+        required: true,
+      }}
+      onInputChange={(e) => handleFileChange(e, "geneCount")}
+      data-testid="input1"
+    />
+  </div>
+  <div className="grid grid-cols-2 gap-4 items-center">
+    <label htmlFor="experimentalFile" className="text-right">
+      Upload your experimental condition file
+    </label>
+    <FileInput
+      className="w-400"
+      text={selectedSampleInfoName || "Experimental design table..."}
+      inputProps={{
+        id: "experimentalFile",
+        accept: ".csv",
+        ref: sampleInfoRef,
+        required: true,
+      }}
+      onInputChange={(e) => handleFileChange(e, "sampleInfo")}
+      data-testid="input2"
+    />
+  </div>
+</div>
         <div className="flex justify-center items-center mt-6">
         <label className="inline mr-3">Colour By:</label>
             <HTMLSelect // Add this right before the PCAGraph component

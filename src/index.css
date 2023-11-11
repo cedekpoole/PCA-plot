@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bp5-file-upload-input {
+    border-radius: 3px !important;
+}
+
+.bp5-file-upload-input::after {
+    background-color: rgb(47,128,237) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 3px !important;
+    font-weight: 300 !important;
+    font-size: 13px !important;
+}
+
+.bp5-file-upload-input:hover::after {
+    background-color: rgba(47,128,237, 0.9) !important;
+}
