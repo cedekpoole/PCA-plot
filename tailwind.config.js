@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary-50": "rbga(47,128,237,0.5)",
-        "primary-80": "rbga(47,128,237,0.8)",
-        "primary-100": "rbga(47,128,237,1)"
+        "primary-50": "#83B3F4",
+        "primary-80": "#5E9BED",
+        "primary-100": "rgba(47,128,237,1)"
       },
       screens: {
         xs: "480px",

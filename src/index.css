@@ -18,3 +18,8 @@
 .bp5-file-upload-input:hover::after {
     background-color: rgba(47,128,237, 0.9) !important;
 }
+
+.bp5-html-select select, .bp5-select select {
+    background-color: #EFEFEF !important;
+    color: #5A627D !important;
+}
