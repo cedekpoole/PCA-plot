@@ -22,12 +22,12 @@ function UserInput({
   const [selectedGeneCountName, setSelectedGeneCountName] = useState("");
   const [selectedSampleInfoName, setSelectedSampleInfoName] = useState("");
 
-  
-
   useEffect(() => {
     // Logic to handle disabling/enabling checkboxes
     document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-      checkbox.disabled = selectedCheckboxes.length >= 3 && !selectedCheckboxes.includes(checkbox.value);
+      checkbox.disabled =
+        selectedCheckboxes.length >= 3 &&
+        !selectedCheckboxes.includes(checkbox.value);
     });
   }, [selectedCheckboxes]);
 
@@ -80,8 +80,8 @@ function UserInput({
     <div data-testid="user-input">
       <form>
         <div className="flex flex-col items-center space-y-3 pt-10">
-          <div className="grid grid-cols-2 gap-6 items-center">
-            <label htmlFor="dataFile" className="text-right">
+          <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center">
+            <label htmlFor="dataFile" className="sm:text-right">
               Upload your data file
             </label>
             <FileInput
@@ -96,8 +96,8 @@ function UserInput({
               data-testid="input1"
             />
           </div>
-          <div className="grid grid-cols-2 gap-6 items-center">
-            <label htmlFor="experimentalFile" className="text-right">
+          <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center">
+            <label htmlFor="experimentalFile" className="sm:text-right">
               Upload your experimental condition file
             </label>
             <FileInput
@@ -113,8 +113,9 @@ function UserInput({
             />
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-6 items-center mt-6">
-          <label htmlFor="colorBy" className="text-right">
+        <div className="flex flex-col items-center">
+        <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center mt-6">
+          <label htmlFor="colorBy" className="sm:text-right">
             Colour by:
           </label>
           <HTMLSelect // Add this right before the PCAGraph component
@@ -127,8 +128,8 @@ function UserInput({
             className="w-[295px]"
           />
         </div>
-        <div className="grid grid-cols-2 gap-6 items-center mt-8">
-          <label htmlFor="filterPC" className="text-right">
+        <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center mt-8">
+          <label htmlFor="filterPC" className="sm:text-right">
             Filter Principal Components
           </label>
           <div className="flex gap-4">
@@ -155,6 +156,7 @@ function UserInput({
               </div>
             ))}
           </div>
+        </div>
         </div>
         <hr className="mt-10 mb-4 border-t border-gray-300 w-1/2 mx-auto" />
       </form>
