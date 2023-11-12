@@ -5,12 +5,12 @@ import highchartsAccessibility from "highcharts/modules/accessibility";
 import HC_annotations from "highcharts/modules/annotations";
 import { useState, useEffect } from "react";
 import Highcharts3d from "highcharts/highcharts-3d";
-Highcharts3d(Highcharts);
 
 // Initializing Highcharts with additional modules
 highchartsAccessibility(Highcharts);
 HC_exporting(Highcharts);
 HC_annotations(Highcharts);
+Highcharts3d(Highcharts);
 
 function PCAGraph({
   pcaData,
@@ -139,7 +139,7 @@ function PCAGraph({
         },
       },
       title: {
-        text: ".",
+        text: "",
         style: {
           color: "transparent",
         },
