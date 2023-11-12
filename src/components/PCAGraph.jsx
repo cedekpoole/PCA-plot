@@ -4,6 +4,8 @@ import HC_exporting from "highcharts/modules/exporting";
 import highchartsAccessibility from "highcharts/modules/accessibility";
 import HC_annotations from "highcharts/modules/annotations";
 import { useState, useEffect } from "react";
+import Highcharts3d from "highcharts/highcharts-3d";
+Highcharts3d(Highcharts);
 
 // Initializing Highcharts with additional modules
 highchartsAccessibility(Highcharts);
@@ -24,6 +26,14 @@ function PCAGraph({
 
   const [colorMapping, setColorMapping] = useState({});
 
+  const is3D = selectedPCs.length === 3;
+
+  const [chartKey, setChartKey] = useState(0);
+
+  useEffect(() => {
+    setChartKey(chartKey + 1);
+  }, [is3D]);
+
   useEffect(() => {
     // Create a stable color mapping for series names
     const updatedColorMapping = { ...colorMapping };
@@ -42,7 +52,7 @@ function PCAGraph({
   const colorsArray = [
     "rgb(254,125,43)",
     "rgb(60,89,193)",
-    "rgb(0,158,115)", 
+    "rgb(0,158,115)",
     "rgb(247,72, 165)",
     "rgb(240,228,66)", // Add more colors if needed
   ];
@@ -62,6 +72,7 @@ function PCAGraph({
       const point = {
         x: scoresData[idx][sortedPCs[0] - 1],
         y: scoresData[idx][sortedPCs[1] - 1],
+        z: is3D ? scoresData[idx][sortedPCs[2] - 1] : undefined,
         name: Object.values(sample)[0],
         id: "point" + idx, // Unique ID for the point
         ...sample,
@@ -100,6 +111,22 @@ function PCAGraph({
     const newOptions = {
       chart: {
         type: "scatter",
+        marginBottom: 120,
+        options3d: is3D
+          ? {
+              enabled: true,
+              alpha: 10,
+              beta: 30,
+              depth: 250,
+              viewDistance: 5,
+              fitToPlot: false,
+              frame: {
+                bottom: { size: 1, color: "rgba(0,0,0,0.02)" },
+                back: { size: 1, color: "rgba(0,0,0,0.04)" },
+                side: { size: 1, color: "rgba(0,0,0,0.06)" },
+              },
+            }
+          : null,
         events: {
           load: function () {
             // Add default annotations on load
@@ -126,6 +153,8 @@ function PCAGraph({
       },
       yAxis: {
         lineWidth: 1,
+        gridLineWidth: 1, // Width of the grid lines
+        gridLineColor: "#EEEEEE",
         title: {
           text: `PC${sortedPCs[1]} (${(
             pcaData[`pc${sortedPCs[1]}`] * 100
@@ -212,11 +241,12 @@ function PCAGraph({
     scoresData,
     parsedSampleInfo,
     selectedPCs,
-  ]); 
+  ]);
 
   return (
     <div className="h-[600px] w-full">
       <HighchartsReact
+        key={chartKey}
         highcharts={Highcharts}
         options={chartOptions}
         containerProps={{ className: "h-full" }}
