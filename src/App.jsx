@@ -42,10 +42,10 @@ function App() {
         setColorBy={setColorBy}
       />
       {showChart && (
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-10">
           <div className="mt-6 flex flex-col lg:flex-row w-5/6 lg:-ml-10">
             <div className="lg:w-2/3 w-full lg:mr-4">
-              {selectedCheckboxes.length === 2 && (
+              {selectedCheckboxes.length >= 2 && selectedCheckboxes.length <= 3 && (
                 <PCAGraph
                   pcaData={pcaData}
                   scoresData={scoresData}

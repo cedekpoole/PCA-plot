@@ -22,23 +22,13 @@ function UserInput({
   const [selectedGeneCountName, setSelectedGeneCountName] = useState("");
   const [selectedSampleInfoName, setSelectedSampleInfoName] = useState("");
 
+  
+
   useEffect(() => {
     // Logic to handle disabling/enabling checkboxes
-    if (selectedCheckboxes.length >= 2) {
-      document
-        .querySelectorAll('input[type="checkbox"]')
-        .forEach((checkbox) => {
-          if (!selectedCheckboxes.includes(checkbox.value)) {
-            checkbox.disabled = true;
-          }
-        });
-    } else {
-      document
-        .querySelectorAll('input[type="checkbox"]')
-        .forEach((checkbox) => {
-          checkbox.disabled = false;
-        });
-    }
+    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+      checkbox.disabled = selectedCheckboxes.length >= 3 && !selectedCheckboxes.includes(checkbox.value);
+    });
   }, [selectedCheckboxes]);
 
   useEffect(() => {
