@@ -158,13 +158,15 @@ function PCAGraph({
       chart: {
         type: "scatter",
         marginBottom: 120,
+        marginRight: 15,
+        marginTop: 80,
         options3d: is3D
           ? {
               enabled: true,
               alpha: 10,
               beta: 30,
               depth: 250,
-              viewDistance: 5,
+              viewDistance: 25,
               fitToPlot: false,
               frame: {
                 bottom: { size: 1, color: "rgba(0,0,0,0.02)" },
@@ -207,6 +209,21 @@ function PCAGraph({
           ).toFixed(2)}%)`,
         },
       },
+      zAxis: is3D 
+      ? {
+        title: {
+          text: `PC${sortedPCs[2]} (${(
+            pcaData[`pc${sortedPCs[2]}`] * 100
+          ).toFixed(2)}%)`,
+          style: {
+            color: '#333333',
+          },
+          align: 'high',
+          offset: 0,
+          rotation: 0,
+          y: 15, // Adjust the y position to avoid overlapping
+        },
+      } : null,
       tooltip: {
         hideDelay: 200,
       },
