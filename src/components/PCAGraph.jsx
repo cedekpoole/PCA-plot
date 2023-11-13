@@ -43,17 +43,23 @@ function PCAGraph({
       eStart = chart.pointer.normalize(eStart);
   
       const posX = eStart.chartX,
-            beta = chart.options.chart.options3d.beta,
+            initialBeta = chart.options.chart.options3d.beta,
             sensitivity = 5;  // lower is more sensitive
       const handlers = [];
   
       function drag(e) {
         e = chart.pointer.normalize(e);
+  
+        // Calculate the new beta value within specified limits
+        let newBeta = initialBeta + (posX - e.chartX) / sensitivity;
+        const minBeta = 20; // Minimum rotation angle (restricts left rotation)
+        const maxBeta = 80;  // Maximum rotation angle (allows more right rotation)
+        newBeta = Math.max(minBeta, Math.min(newBeta, maxBeta)); // Constrain within limits
+  
         chart.update({
           chart: {
             options3d: {
-              // Keep alpha constant and only update beta
-              beta: beta + (posX - e.chartX) / sensitivity
+              beta: newBeta
             }
           }
         }, undefined, undefined, false);
@@ -77,7 +83,6 @@ function PCAGraph({
     Highcharts.addEvent(chart.container, 'mousedown', dragStart);
     Highcharts.addEvent(chart.container, 'touchstart', dragStart);
   };
-
   useEffect(() => {
     setChartKey((prev) => prev + 1);
   }, [is3D]);
