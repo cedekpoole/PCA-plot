@@ -3,7 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import HC_exporting from "highcharts/modules/exporting";
 import highchartsAccessibility from "highcharts/modules/accessibility";
 import HC_annotations from "highcharts/modules/annotations";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Highcharts3d from "highcharts/highcharts-3d";
 
 // Initializing Highcharts with additional modules
@@ -23,16 +23,65 @@ function PCAGraph({
   const sortedPCs = [...selectedPCs].sort((a, b) => a - b);
 
   const [chartOptions, setChartOptions] = useState({});
-
   const [colorMapping, setColorMapping] = useState({});
+  const [chartKey, setChartKey] = useState(0);
 
   const is3D = selectedPCs.length === 3;
 
-  const [chartKey, setChartKey] = useState(0);
+  const chartRef = useRef(null);
+
+  const colorsArray = [
+    "rgb(254,125,43)",
+    "rgb(60,89,193)",
+    "rgb(0,158,115)",
+    "rgb(247,72, 165)",
+    "rgb(240,228,66)", // Add more colors if needed
+  ];
+
+  const addDragFunctionality = (chart) => {
+    function dragStart(eStart) {
+      eStart = chart.pointer.normalize(eStart);
+  
+      const posX = eStart.chartX,
+            beta = chart.options.chart.options3d.beta,
+            sensitivity = 5;  // lower is more sensitive
+      const handlers = [];
+  
+      function drag(e) {
+        e = chart.pointer.normalize(e);
+        chart.update({
+          chart: {
+            options3d: {
+              // Keep alpha constant and only update beta
+              beta: beta + (posX - e.chartX) / sensitivity
+            }
+          }
+        }, undefined, undefined, false);
+      }
+  
+      function unbindAll() {
+        handlers.forEach((unbind) => {
+          if (unbind) {
+            unbind();
+          }
+        });
+        handlers.length = 0;
+      }
+  
+      handlers.push(Highcharts.addEvent(document, 'mousemove', drag));
+      handlers.push(Highcharts.addEvent(document, 'touchmove', drag));
+      handlers.push(Highcharts.addEvent(document, 'mouseup', unbindAll));
+      handlers.push(Highcharts.addEvent(document, 'touchend', unbindAll));
+    }
+  
+    Highcharts.addEvent(chart.container, 'mousedown', dragStart);
+    Highcharts.addEvent(chart.container, 'touchstart', dragStart);
+  };
 
   useEffect(() => {
-    setChartKey(chartKey + 1);
+    setChartKey((prev) => prev + 1);
   }, [is3D]);
+  
 
   useEffect(() => {
     // Create a stable color mapping for series names
@@ -49,14 +98,6 @@ function PCAGraph({
     setColorMapping(updatedColorMapping);
   }, [colorBy, parsedSampleInfo]);
 
-  const colorsArray = [
-    "rgb(254,125,43)",
-    "rgb(60,89,193)",
-    "rgb(0,158,115)",
-    "rgb(247,72, 165)",
-    "rgb(240,228,66)", // Add more colors if needed
-  ];
-
   useEffect(() => {
     const seriesData = {};
     const initialAnnotations = [];
@@ -72,7 +113,7 @@ function PCAGraph({
       const point = {
         x: scoresData[idx][sortedPCs[0] - 1],
         y: scoresData[idx][sortedPCs[1] - 1],
-        z: is3D ? scoresData[idx][sortedPCs[2] - 1] : undefined,
+        z: is3D ? scoresData[idx][sortedPCs[2] - 1] : null,
         name: Object.values(sample)[0],
         id: "point" + idx, // Unique ID for the point
         ...sample,
@@ -126,7 +167,7 @@ function PCAGraph({
                 side: { size: 1, color: "rgba(0,0,0,0.06)" },
               },
             }
-          : null,
+          : {enabled: false},
         events: {
           load: function () {
             // Add default annotations on load
@@ -232,9 +273,13 @@ function PCAGraph({
       series: Object.values(seriesData),
       annotations: initialAnnotations,
     };
-
+    
+    setTimeout(() => {
+      console.log(chartRef.current)
+    }, 0);
     setChartOptions(newOptions);
   }, [
+    is3D,
     colorBy,
     pcaData,
     colorMapping,
@@ -243,13 +288,21 @@ function PCAGraph({
     selectedPCs,
   ]);
 
+  const handleChartRendered = (chart) => {
+    if (is3D) {
+      addDragFunctionality(chart);
+    } 
+  };
+
   return (
     <div className="h-[600px] w-full">
       <HighchartsReact
         key={chartKey}
+        ref={chartRef}
         highcharts={Highcharts}
         options={chartOptions}
         containerProps={{ className: "h-full" }}
+        callback={handleChartRendered}
       />
     </div>
   );
