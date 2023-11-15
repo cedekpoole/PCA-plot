@@ -24,3 +24,7 @@
     background-color: #EFEFEF !important;
     color: #5A627D !important;
 }
+
+.bp5-icon-download svg  {
+    fill: rgb(60, 89, 193) !important;
+  }

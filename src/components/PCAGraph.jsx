@@ -166,7 +166,7 @@ function PCAGraph({
               alpha: 10,
               beta: 30,
               depth: 250,
-              viewDistance: 25,
+              viewDistance: 15,
               fitToPlot: false,
               frame: {
                 bottom: { size: 1, color: "rgba(0,0,0,0.02)" },
@@ -317,7 +317,7 @@ function PCAGraph({
   };
 
   return (
-    <div className="h-[600px] w-full">
+    <div className="h-[450px] -ml-5 sm:h-[700px] lg:h-[600px] w-full">
       <HighchartsReact
         key={chartKey}
         ref={chartRef}
