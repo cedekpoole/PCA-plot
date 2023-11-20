@@ -80,7 +80,7 @@ function UserInput({
     <div data-testid="user-input">
       <form>
         <div className="flex flex-col items-center space-y-3 pt-10">
-          <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center">
+          <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 sm:gap-6 items-center">
             <label htmlFor="dataFile" className="sm:text-right">
               Upload your data file
             </label>
@@ -96,7 +96,7 @@ function UserInput({
               data-testid="input1"
             />
           </div>
-          <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center">
+          <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 sm:gap-6 items-center">
             <label htmlFor="experimentalFile" className="sm:text-right">
               Upload your experimental condition file
             </label>
@@ -114,7 +114,7 @@ function UserInput({
           </div>
         </div>
         <div className="flex flex-col items-center">
-        <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center mt-6">
+        <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 sm:gap-6 items-center mt-6">
           <label htmlFor="colorBy" className="sm:text-right">
             Colour by:
           </label>
@@ -128,7 +128,7 @@ function UserInput({
             className="w-[295px]"
           />
         </div>
-        <div className="grid sm:grid-cols-2 grid-cols-1 gap-6 items-center mt-8">
+        <div className="grid sm:grid-cols-2 grid-cols-1 gap-5 sm:gap-6 items-center mt-8">
           <label htmlFor="filterPC" className="sm:text-right">
             Filter Principal Components
           </label>
