@@ -1,0 +1,1 @@
+export { default as PCAPlot } from './App.jsx';

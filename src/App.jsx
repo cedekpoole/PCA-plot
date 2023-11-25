@@ -1,3 +1,6 @@
+import './index.css'
+import "normalize.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
 import UserInput from "./components/UserInput";
 import PCAGraph from "./components/PCAGraph";
 import ScreePlot from "./components/ScreePlot";
