@@ -1,8 +1,9 @@
 {
   "name": "pca-plot",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.0.0",
   "type": "module",
+  "main": "src/main.jsx",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,6 +11,18 @@
     "preview": "vite preview",
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cedekpoole/PCA-plot"
+  },
+  "keywords": [
+    "react",
+    "highcharts",
+    "data-visualization",
+    "pca",
+    "genomics"
+  ],
+  "author": "cedekpoole",
   "jest": {
     "testEnvironment": "jsdom",
     "moduleNameMapper": {
@@ -49,5 +62,9 @@
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
