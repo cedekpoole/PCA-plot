@@ -4,7 +4,7 @@ import ScreePlot from "./components/ScreePlot";
 import GeneTable from "./components/GeneTable";
 import { downloadCSV } from "./components/helpers/CSVHandling";
 import { useState } from "react";
-import { Button, Dialog, DialogBody, DialogFooter, HTMLSelect } from "@blueprintjs/core";
+import { Button, Dialog, DialogBody, DialogFooter } from "@blueprintjs/core";
 
 function App() {
   const [showChart, setShowChart] = useState(false);
