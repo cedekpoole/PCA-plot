@@ -7,12 +7,12 @@ export default defineConfig({
   plugins: [react(), cssInjectedByJsPlugin()],
   build: {
     lib: {
-      entry: "src/exports.js", // Your library's entry point
-      name: "pca-plot", // The name of your library
-      formats: ["es", "umd"], // Output formats
+      entry: "src/exports.js", 
+      name: "pca-plot", 
+      formats: ["es", "umd"], 
     },
     rollupOptions: {
-      external: ["react", "react-dom"], // Do not bundle React and ReactDOM
+      external: ["react", "react-dom"], 
       output: {
         globals: {
           react: "React",
