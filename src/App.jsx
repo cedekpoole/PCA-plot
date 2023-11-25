@@ -57,7 +57,7 @@ function App() {
             </div>
             <div className="lg:w-1/3 w-full lg:mt-0 mt-4 lg:self-center lg:mb-11">
               <div className="flex justify-center">
-                <div className="w-96 -ml-20 md:ml-0">
+                <div className="w-96">
                   <ScreePlot pcaData={pcaData} onSelectPC={handleSelectPC} />
                 </div>
                   {selectedPCIndex && (

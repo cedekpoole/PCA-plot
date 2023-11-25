@@ -295,10 +295,6 @@ function PCAGraph({
       series: Object.values(seriesData),
       annotations: initialAnnotations,
     };
-    
-    setTimeout(() => {
-      console.log(chartRef.current)
-    }, 0);
     setChartOptions(newOptions);
   }, [
     is3D,
