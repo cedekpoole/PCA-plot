@@ -79,9 +79,9 @@ function UserInput({
   return (
     <div data-testid="user-input">
       <form>
-        <div className="flex flex-col items-center space-y-3 pt-10">
-          <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 sm:gap-6 items-center">
-            <label htmlFor="dataFile" className="sm:text-right">
+        <div className="pca-flex pca-flex-col pca-items-center pca-space-y-3 pca-pt-10">
+          <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 pca-items-center">
+            <label htmlFor="dataFile" className="sm:pca-text-right">
               Upload your data file
             </label>
             <FileInput
@@ -94,10 +94,11 @@ function UserInput({
               }}
               onInputChange={(e) => handleFileChange(e, "geneCount")}
               data-testid="input1"
+              className="input"
             />
           </div>
-          <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 sm:gap-6 items-center">
-            <label htmlFor="experimentalFile" className="sm:text-right">
+          <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 pca-items-center">
+            <label htmlFor="experimentalFile" className="sm:pca-text-right">
               Upload your experimental condition file
             </label>
             <FileInput
@@ -110,12 +111,13 @@ function UserInput({
               }}
               onInputChange={(e) => handleFileChange(e, "sampleInfo")}
               data-testid="input2"
+              className="input"
             />
           </div>
         </div>
-        <div className="flex flex-col items-center">
-        <div className="grid sm:grid-cols-2 grid-cols-1 gap-2 sm:gap-6 items-center mt-6">
-          <label htmlFor="colorBy" className="sm:text-right">
+        <div className="pca-flex pca-flex-col pca-items-center">
+        <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 pca-items-center pca-mt-6">
+          <label htmlFor="colorBy" className="sm:pca-text-right">
             Colour by:
           </label>
           <HTMLSelect // Add this right before the PCAGraph component
@@ -125,14 +127,14 @@ function UserInput({
               .map((key) => ({ label: key, value: key }))}
             value={colorBy}
             onChange={handleColorByChange}
-            className="w-[295px]"
+            className="pca-w-[295px]"
           />
         </div>
-        <div className="grid sm:grid-cols-2 grid-cols-1 gap-5 sm:gap-6 items-center mt-8">
-          <label htmlFor="filterPC" className="sm:text-right">
+        <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-5 sm:pca-gap-6 pca-items-center pca-mt-8">
+          <label htmlFor="filterPC" className="sm:pca-text-right">
             Filter Principal Components
           </label>
-          <div className="flex gap-4">
+          <div className="pca-flex pca-gap-4">
             {["1", "2", "3", "4"].map((value) => (
               <div key={value} className="checkbox-button-group">
                 <input
@@ -141,15 +143,15 @@ function UserInput({
                   value={value}
                   checked={selectedCheckboxes.includes(value)}
                   onChange={handleCheckboxChange}
-                  className="hidden" // Hide the checkbox
+                  className="pca-hidden" // Hide the checkbox
                 />
                 <label
                   htmlFor={`pc${value}`}
                   className={`checkbox-button-label ${
                     selectedCheckboxes.includes(value)
-                      ? "bg-primary-100 border-2 border-primary-80 hover:bg-primary-80"
-                      : "bg-gray-300 border-2 border-gray-200 hover:bg-gray-200"
-                  } text-white border-primary-100font-medium py-2 px-4 rounded-lg cursor-pointer transition-colors`}
+                      ? "pca-bg-primary-100 pca-border-2 pca-border-primary-80 hover:pca-bg-primary-80"
+                      : "pca-bg-gray-300 pca-border-2 pca-border-gray-200 hover:pca-bg-gray-200"
+                  } pca-text-white pca-py-2 pca-px-4 pca-rounded-lg pca-cursor-pointer pca-transition-colors`}
                 >
                   {`PC${value}`}
                 </label>
@@ -158,7 +160,7 @@ function UserInput({
           </div>
         </div>
         </div>
-        <hr className="mt-10 mb-4 border-t border-gray-300 w-1/2 mx-auto" />
+        <hr className="pca-mt-10 pca-mb-4 pca-border-t pca-border-gray-300 pca-w-1/2 pca-mx-auto" />
       </form>
     </div>
   );
