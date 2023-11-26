@@ -2,7 +2,7 @@ import { HTMLTable } from "@blueprintjs/core";
 
 function TopGenesTable({ topGenes }) {
   return (
-    <HTMLTable striped={true} className="w-full text-xs">
+    <HTMLTable striped={true} className="pca-w-full pca-text-xs">
       <thead>
         <tr>
           <th>#</th>

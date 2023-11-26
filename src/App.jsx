@@ -45,9 +45,9 @@ function App() {
         setColorBy={setColorBy}
       />
       {showChart && (
-        <div className="flex justify-center mb-10">
-          <div className="mt-6 flex flex-col lg:flex-row w-5/6 lg:-ml-10">
-            <div className="lg:w-2/3 w-full lg:mr-4">
+        <div className="pca-flex pca-justify-center pca-mb-10">
+          <div className="pca-mt-6 pca-flex pca-flex-col lg:pca-flex-row pca-w-5/6 lg:pca--ml-10">
+            <div className="lg:pca-w-2/3 pca-w-full lg:pca-mr-4">
               {selectedCheckboxes.length >= 2 && selectedCheckboxes.length <= 3 && (
                 <PCAGraph
                   pcaData={pcaData}
@@ -58,9 +58,9 @@ function App() {
                 />
               )}
             </div>
-            <div className="lg:w-1/3 w-full lg:mt-0 mt-4 lg:self-center lg:mb-11">
-              <div className="flex justify-center">
-                <div className="w-96">
+            <div className="lg:pca-w-1/3 pca-w-full lg:pca-mt-0 pca-mt-4 lg:pca-self-center lg:pca-mb-11">
+              <div className="pca-flex pca-justify-center">
+                <div className="pca-w-96">
                   <ScreePlot pcaData={pcaData} onSelectPC={handleSelectPC} />
                 </div>
                   {selectedPCIndex && (
@@ -72,7 +72,7 @@ function App() {
                       ).toFixed(2)}%):`}
                     >
                       <DialogBody>
-                        <div className="max-h-[70%] overflow-y-auto">
+                        <div className="pca-max-h-[70%] pca-overflow-y-auto">
                           <GeneTable topGenes={topGenesList} />
                         </div>
                       </DialogBody>

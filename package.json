@@ -1,6 +1,6 @@
 {
   "name": "pca-plot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "dist/pca-plot.js",
   "files": [

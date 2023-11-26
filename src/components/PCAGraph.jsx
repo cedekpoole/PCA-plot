@@ -313,13 +313,13 @@ function PCAGraph({
   };
 
   return (
-    <div className="h-[450px] -ml-5 sm:h-[700px] lg:h-[600px] w-full">
+    <div className="pca-h-[450px] pca--ml-5 sm:pca-h-[700px] lg:pca-h-[600px] pca-w-full">
       <HighchartsReact
         key={chartKey}
         ref={chartRef}
         highcharts={Highcharts}
         options={chartOptions}
-        containerProps={{ className: "h-full" }}
+        containerProps={{ className: "pca-h-full" }}
         callback={handleChartRendered}
       />
     </div>
