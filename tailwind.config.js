@@ -9,9 +9,9 @@ export default {
     extend: {
       colors: {
         "primary-50": "#83B3F4",
-        "primary-80": "#5E9BED",
+        "primary-80": "rgba(47,128,237,1)",
         "primary-90": "rgba(47,128,237,0.9)",
-        "primary-100": "rgba(47,128,237,1)"
+        "primary-100": "rgb(60, 89, 193)"
       },
       screens: {
         xs: "480px",
