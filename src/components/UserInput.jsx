@@ -120,7 +120,8 @@ function UserInput({
           <label htmlFor="colorBy" className="sm:pca-text-right">
             Colour by:
           </label>
-          <HTMLSelect // Add this right before the PCAGraph component
+          <HTMLSelect 
+            id="colorBy"
             options={Object.keys(parsedSampleInfo[0] || {})
               .filter((key) => key !== "name")
               .slice(1)
