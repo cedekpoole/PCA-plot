@@ -17,7 +17,7 @@
 }
 
 .input>.bp5-file-upload-input:hover::after {
-    background-color: rgba(47,128,237,1) !important;
+    background-color: rgba(60, 89, 193, 0.9) !important;
 }
 
 .bp5-html-select select, .bp5-select select {

@@ -150,7 +150,7 @@ function UserInput({
                   htmlFor={`pc${value}`}
                   className={`checkbox-button-label ${
                     selectedCheckboxes.includes(value)
-                      ? "pca-bg-primary-100 pca-border-2 pca-border-primary-80 hover:pca-bg-primary-80"
+                      ? "pca-bg-primary-100 pca-border-2 pca-border-gray-200 hover:pca-bg-primary-80 hover:pca-border-primary-80"
                       : "pca-bg-gray-300 pca-border-2 pca-border-gray-200 hover:pca-bg-gray-200"
                   } pca-text-white pca-py-2 pca-px-4 pca-rounded-lg pca-cursor-pointer pca-transition-colors`}
                 >
