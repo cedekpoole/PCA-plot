@@ -32,6 +32,8 @@ function App() {
   };
   return (
     <>
+    <div className="lg:pca-flex">
+    <div className="pca-sidebar lg:pca-w-1/4 lg:pca-min-h-screen lg:pca-bg-gray-50 lg:pca-shadow-md">
       <UserInput
         setShowChart={setShowChart}
         setPcaData={setPcaData}
@@ -44,10 +46,12 @@ function App() {
         colorBy={colorBy}
         setColorBy={setColorBy}
       />
+      </div>
+      <div className="pca-main-content lg:pca-w-3/4">
       {showChart && (
         <div className="pca-flex pca-justify-center pca-mb-10">
-          <div className="pca-mt-6 pca-flex pca-flex-col lg:pca-flex-row pca-w-5/6 lg:pca--ml-10">
-            <div className="lg:pca-w-2/3 pca-w-full lg:pca-mr-4">
+          <div className="pca-mt-6 pca-flex pca-flex-col  pca-w-5/6">
+            <div className=" pca-w-full">
               {selectedCheckboxes.length >= 2 && selectedCheckboxes.length <= 3 && (
                 <PCAGraph
                   pcaData={pcaData}
@@ -58,9 +62,9 @@ function App() {
                 />
               )}
             </div>
-            <div className="lg:pca-w-1/3 pca-w-full lg:pca-mt-0 pca-mt-4 lg:pca-self-center lg:pca-mb-11">
+            <div className="pca-w-full pca-mt-4 lg:pca-self-center">
               <div className="pca-flex pca-justify-center">
-                <div className="pca-w-96">
+                <div className="pca-w-1/2">
                   <ScreePlot pcaData={pcaData} onSelectPC={handleSelectPC} />
                 </div>
                   {selectedPCIndex && (
@@ -96,6 +100,8 @@ function App() {
           </div>
         </div>
       )}
+      </div>
+      </div>
     </>
   );
 }
