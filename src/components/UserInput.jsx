@@ -79,9 +79,9 @@ function UserInput({
   return (
     <div data-testid="user-input">
       <form>
-        <div className="pca-flex pca-flex-col pca-items-center pca-space-y-3 pca-pt-10">
-          <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 pca-items-center">
-            <label htmlFor="dataFile" className="sm:pca-text-right">
+        <div className="pca-flex pca-flex-col pca-items-center pca-space-y-5 pca-pt-10">
+          <div className="pca-grid sm:pca-grid-cols-2 lg:pca-grid-cols-1 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 lg:pca-gap-2 pca-items-center">
+            <label htmlFor="dataFile" className="sm:pca-text-right lg:pca-text-left">
               Upload your data file
             </label>
             <FileInput
@@ -97,8 +97,8 @@ function UserInput({
               className="input"
             />
           </div>
-          <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 pca-items-center">
-            <label htmlFor="experimentalFile" className="sm:pca-text-right">
+          <div className="pca-grid sm:pca-grid-cols-2 lg:pca-grid-cols-1 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 lg:pca-gap-2 pca-items-center">
+            <label htmlFor="experimentalFile" className="sm:pca-text-right lg:pca-text-left">
               Upload your experimental condition file
             </label>
             <FileInput
@@ -115,9 +115,10 @@ function UserInput({
             />
           </div>
         </div>
+        <hr className="pca-hidden lg:pca-block pca-mt-6 pca-border-t pca-border-gray-300 pca-w-1/2 pca-mx-auto" />
         <div className="pca-flex pca-flex-col pca-items-center">
-        <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 pca-items-center pca-mt-6">
-          <label htmlFor="colorBy" className="sm:pca-text-right">
+        <div className="pca-grid sm:pca-grid-cols-2 lg:pca-grid-cols-1 pca-grid-cols-1 pca-gap-2 sm:pca-gap-6 lg:pca-gap-2 pca-items-center pca-mt-6">
+          <label htmlFor="colorBy" className="sm:pca-text-right lg:pca-text-left">
             Colour by:
           </label>
           <HTMLSelect 
@@ -131,8 +132,8 @@ function UserInput({
             className="pca-w-[295px]"
           />
         </div>
-        <div className="pca-grid sm:pca-grid-cols-2 pca-grid-cols-1 pca-gap-5 sm:pca-gap-6 pca-items-center pca-mt-8">
-          <label htmlFor="filterPC" className="sm:pca-text-right">
+        <div className="pca-grid sm:pca-grid-cols-2 lg:pca-grid-cols-1 pca-grid-cols-1 pca-gap-5 sm:pca-gap-6 lg:pca-gap-5 pca-items-center pca-mt-8">
+          <label htmlFor="filterPC" className="sm:pca-text-right lg:pca-text-left">
             Filter Principal Components
           </label>
           <div className="pca-flex pca-gap-4">
@@ -150,9 +151,9 @@ function UserInput({
                   htmlFor={`pc${value}`}
                   className={`checkbox-button-label ${
                     selectedCheckboxes.includes(value)
-                      ? "pca-bg-primary-100 pca-border-2 pca-border-gray-200 hover:pca-bg-primary-80 hover:pca-border-primary-80"
-                      : "pca-bg-gray-300 pca-border-2 pca-border-gray-200 hover:pca-bg-gray-200"
-                  } pca-text-white pca-py-2 pca-px-4 pca-rounded-lg pca-cursor-pointer pca-transition-colors`}
+                      ? "pca-bg-primary-100 pca-border-2 pca-border-primary-100 hover:pca-bg-primary-80 hover:pca-border-primary-80"
+                      : "pca-bg-gray-300 pca-border-2 pca-border-gray-300 hover:pca-bg-gray-200 hover:pca-border-gray-200"
+                  } pca-text-white pca-py-2 pca-px-4 pca-rounded-lg pca-cursor-pointer pca-transition-colors pca-shadow-md`}
                 >
                   {`PC${value}`}
                 </label>
